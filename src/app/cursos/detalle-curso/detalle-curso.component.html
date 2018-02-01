@@ -1,0 +1,52 @@
+<div class="row">
+  <div class="col-6 col-md-2"></div>
+  <div class="col-6 col-md-8">
+    <div *ngIf="curso">
+      <div class="card-header">
+        <h1>Informcion del curso</h1>
+        <hr>
+        <div class="card-body">
+          <table style="width:100%">
+            <tr>
+              <th>
+                <h4>Curso:</h4>
+              </th>
+              <td><h4>{{ curso.curso.idCurso }}</h4></td>
+            </tr>
+            <tr>
+              <th>
+                <h4>Nivel:</h4>
+              </th>
+              <td><h4>{{ curso.curso.nivel }}</h4></td>
+            </tr>
+            <tr>
+              <th>
+                <h4>Asignatura:</h4>
+              </th>
+              <td><h4>{{ curso.curso.asignatura }}</h4></td>
+            </tr>
+            <tr>
+              <th>
+                <h4>Profesor Jefe:</h4>
+              </th>
+              <td><h4>{{ curso.curso.profesorJefe }}</h4></td>
+            </tr>
+            <tr>
+              <th>
+                <h4>Sala:</h4>
+              </th>
+              <td><h4>{{ curso.curso.salaCurso}}</h4></td>
+            </tr>
+            <tr>
+              <th>
+                <h4>Alumnos:</h4>
+              </th>
+              <td><h4>{{ curso.curso.totalAlumnos }}</h4></td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-6 col-md-2"></div>
+</div>
