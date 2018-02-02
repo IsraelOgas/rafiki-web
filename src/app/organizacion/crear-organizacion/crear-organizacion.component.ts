@@ -27,7 +27,7 @@ export class CrearOrganizacionComponent implements OnInit {
   ) { 
     this.rForm = fb.group({
       'nombre': [null, Validators.required],
-      'rbd': [null, Validators.required, Validators.min(0), Validators.max(5)],
+      'rbd': [null, Validators.required],
       'descripcion': [null, Validators.compose([
         Validators.required, 
         Validators.minLength(10), 
