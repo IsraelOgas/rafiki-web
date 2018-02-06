@@ -1,68 +1,71 @@
-import { NgModule }      from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { HttpModule } from '@angular/http'
-import {HttpClientModule} from '@angular/common/http';
-
-import { AppComponent } from './app.component';
-import { ListaCursosComponent } from './lista-cursos/lista-cursos.component';
-import { CrearCursoComponent } from './cursos/crear-curso/crear-curso.component';
-import { ModificarCursoComponent } from './cursos/modificar-curso/modificar-curso.component';
-import { AppRoutingModule } from './app-routing.module';
-import { DetalleCursoComponent } from './cursos/detalle-curso/detalle-curso.component';
-
-import { FormsModule }    from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
-// used to create fake backend
-import { fakeBackendProvider } from './_helpers/index';
+import { OrganizacionModule } from './organizacion/organizacion.module';
+import { CursoModule } from './curso/curso.module';
 
-import { routing }        from './app.routing';
+import { AppComponent } from './app.component';
+import { RouterModule, Routes } from '@angular/router';
+import { HomeComponent } from './authentication-authorization/home/home.component';
+import { AuthGuard } from './authentication-authorization/_guards/auth.guard';
+import { LoginComponent } from './authentication-authorization/login/login.component';
+import { RegisterComponent } from './authentication-authorization/register/register.component';
+import { AlertService } from './authentication-authorization/_services/alert.service';
+import { AuthenticationService } from './authentication-authorization/_services/authentication.service';
+import { UserService } from './authentication-authorization/_services/user.service';
+import { JwtInterceptor } from './authentication-authorization/_helpers/jwt.interceptor';
+import { fakeBackendProvider } from './authentication-authorization/_helpers/fake-backend';
 
-import { AlertComponent } from './_directives/index';
-import { AuthGuard } from './_guards/index';
-import { JwtInterceptor } from './_helpers/index';
-import { AlertService, AuthenticationService, UserService } from './_services/index';
-import { HomeComponent } from './home/index';
-import { LoginComponent } from './login/index';
-import { RegisterComponent } from './register/index';
+const appRoutes: Routes = [
+
+  { path: '', component: HomeComponent, canActivate: [AuthGuard] },
+  { path: 'login', component: LoginComponent },
+  { path: 'register', component: RegisterComponent },
+
+  // otherwise redirect to home
+  { path: '**', redirectTo: '' }
+
+];
 
 @NgModule({
   declarations: [
     AppComponent,
-    ListaCursosComponent,
-    CrearCursoComponent,
-    ModificarCursoComponent,
-    DetalleCursoComponent,
-        AlertComponent,
-        HomeComponent,
-        LoginComponent,
-        RegisterComponent
+    HomeComponent,
+    LoginComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
+    BrowserAnimationsModule,
+    RouterModule.forRoot(
+      appRoutes,
+      { enableTracing: true } // <-- debugging purposes only
+    ),
     HttpModule,
-    HttpClientModule,
-    AppRoutingModule,
-    routing
+    OrganizacionModule,
+    CursoModule
   ],
-  providers: [        
+  providers: [
     AuthGuard,
     AlertService,
     AuthenticationService,
     UserService,
-        {
-            provide: HTTP_INTERCEPTORS,
-            useClass: JwtInterceptor,
-            multi: true
-        },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: JwtInterceptor,
+      multi: true
+    },
 
-        // provider used to create fake backend
-        fakeBackendProvider
-    ],
+    // provider used to create fake backend
+    fakeBackendProvider
+  ],
   bootstrap: [AppComponent]
 })
 
