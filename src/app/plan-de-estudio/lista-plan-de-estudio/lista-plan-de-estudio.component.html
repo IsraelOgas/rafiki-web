@@ -1,0 +1,26 @@
+<div class="col-sm-offset-2 col-sm-10">
+  <button type="button " class="btn btn-primary" routerLink="planestudio/crear">Crear Plan De Estudio</button>
+</div>
+<br>
+
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Nombre</th>
+      <th scope="col">Detalles</th>
+      <th scope="col">Editar/Eliminar</th>
+    </tr>
+  </thead>
+  
+  <tbody *ngIf="planDeEstudios" [@animation]="planDeEstudios.planEstudio.length">
+    <tr *ngFor="let plan of planDeEstudios.planEstudio; let i = index">
+      <th scope="row">{{ i+1 }}</th>
+      <td>{{ plan.nombre }}</td>
+      <td><button type="button" class="btn btn-primary" routerLink="/planestudio/{{plan._id}}"> <i class="fas fa-info-circle"></i> Ver Detalles  </button></td>
+      <td>
+        <button type="button" class="btn btn-primary" routerLink="/planestudio/{{plan._id}}/editar"> <i class="fas fa-edit"></i></button> /
+        <button type="button" class="btn btn-primary" (click)="deletePlanEstudio(plan._id, i)"> <i class="fas fa-trash-alt"></i></button>
+    </tr>
+  </tbody>
+</table>
