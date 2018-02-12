@@ -18,7 +18,6 @@ export class PlanDeEstudioService {
   * @returns {Object} Object que contiene un Array de objetos de tipo {PlanEstudio}
   */
   getPlanEstudios() {
-    console.log('GET ' + this.http.get(`${this.domain}`))
     return this.http.get(`${this.domain}`)
   }
 
