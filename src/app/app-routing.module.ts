@@ -1,9 +1,10 @@
 import { NgModule } from '@angular/core'; 
 import { Routes, RouterModule } from '@angular/router'; 
-import { CrearOrganizacionComponent } from './organizacion/crear-organizacion/crear-organizacion.component'; 
-import { ListaOrganizacionesComponent } from './organizacion/lista-organizaciones/lista-organizaciones.component'; 
-import { ModificarOrganizacionComponent } from './organizacion/modificar-organizacion/modificar-organizacion.component'; 
-import { DetallesOrganizacionComponent } from './organizacion/detalles-organizacion/detalles-organizacion.component'; 
+
+import { ListaPlanDeEstudioComponent } from './plan-de-estudio/lista-plan-de-estudio/lista-plan-de-estudio.component';
+import { CrearPlanDeEstudioComponent } from './plan-de-estudio/crear-plan-de-estudio/crear-plan-de-estudio.component';
+import { DetallesPlanDeEstudioComponent } from './plan-de-estudio/detalles-plan-de-estudio/detalles-plan-de-estudio.component';
+import { ModificarPlanDeEstudioComponent } from './plan-de-estudio/modificar-plan-de-estudio/modificar-plan-de-estudio.component';
 
 import { ListaEvaluacionesComponent } from './evaluacion/lista-evaluaciones/lista-evaluaciones.component';
 import { CrearEvaluacionComponent } from './evaluacion/crear-evaluacion/crear-evaluacion.component';
@@ -13,20 +14,20 @@ import { ModificarEvaluacionComponent } from './evaluacion/modificar-evaluacion/
 const routes: Routes = [ 
   // Rutas organizaciones
   { 
-    path: 'organizaciones', 
-    component: ListaOrganizacionesComponent 
+    path: 'planestudios', 
+    component: ListaPlanDeEstudioComponent 
   }, 
   { 
-    path: 'organizacion/:id', 
-    component: DetallesOrganizacionComponent 
+    path: 'planestudio/:id', 
+    component: DetallesPlanDeEstudioComponent 
   }, 
   { 
-    path: 'organizaciones/crear', 
-    component: CrearOrganizacionComponent 
+    path: 'planestudios/crear', 
+    component: CrearPlanDeEstudioComponent 
   }, 
   { 
-    path: 'organizacion/:id/editar', 
-    component: ModificarOrganizacionComponent 
+    path: 'planestudio/:id/editar', 
+    component: ModificarPlanDeEstudioComponent 
   }, 
   // Rutas evaluaciones
   { 

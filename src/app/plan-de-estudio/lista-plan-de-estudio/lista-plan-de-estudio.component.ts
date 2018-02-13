@@ -46,8 +46,8 @@ export class ListaPlanDeEstudioComponent implements OnInit {
   getPlanEstudios(): void {
     this.planDeEstudio.getPlanEstudios()
       .subscribe(res => {
-        this.planDeEstudios = res,
-          console.log(res)
+        console.log(res)
+        this.planDeEstudios = res
       })
   }
 

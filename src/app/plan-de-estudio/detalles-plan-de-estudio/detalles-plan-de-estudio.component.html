@@ -1,0 +1,112 @@
+<!-- <div class="card m-5" style="box-shadow: -2px 2px 2px #888888; ">
+  <div class="card-header">
+    Ficha de Evaluación
+  </div>
+  <div class="table-responsive-md" *ngIf="planestudio">
+    <table class="table no-border">
+      <tr>
+        <th scope="row">Nombre:</th>
+        <td>{{ planestudio.planEstudio.nombre }}</td>
+      </tr>
+      <tr>
+        <th scope="row">Tipo de Jornada:</th>
+        <td>{{ planestudio.planEstudio.tipo }}</td>
+      </tr>
+      <tr>
+        <th scope="row">Horas de Libre Disposicion:</th>
+        <td>{{ planestudio.planEstudio.horasLibreDisposicion }}</td>
+      </tr>
+      <tr>
+        <th scope="row">Tiempo Total Minimo de Formación General:</th>
+        <td>{{ planestudio.planEstudio.totalTiempoMinFG }}</td>
+      </tr>
+      <tr>
+        <th scope="row">Tiempo Total Minimo de Formación Diferenciada:</th>
+        <td>{{ planestudio.planEstudio.totalTiempoMinFD }}</td>
+      </tr>
+      <table class="table no-border" style="width:100% !important;">
+        <thead>
+          <tr>
+            <th scope="col">Asignatura</th>
+            <th scope="col">Horas Anuales</th>
+            <th scope="col">Horas Mensuales</th>
+          </tr>
+        </thead>
+        <tr *ngFor=" let asignatura of planestudio.planEstudio.asignaturas ; let i=index">
+          <th scope="row">{{ asignatura.nombre }}</th>
+          <td>{{ asignatura.horasMensuales }}</td>
+          <td>{{ asignatura.horasAnuales }}</td>
+        </tr>
+      </table>
+    </table> -->
+
+
+<div id="accordion" *ngIf="planestudio">
+  <div class="card">
+    <div class="card-header" id="headingOne">
+      <h5 class="mb-0">
+        <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+          Informacion General
+        </button>
+      </h5>
+    </div>
+
+    <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+      <div class="card-body">
+        <div class="table-responsive-md">
+          <table class="table no-border">
+            <tr>
+              <th scope="row">Nombre:</th>
+              <td>{{ planestudio.planEstudio.nombre }}</td>
+            </tr>
+            <tr>
+              <th scope="row">Tipo de Jornada:</th>
+              <td>{{ planestudio.planEstudio.tipo }}</td>
+            </tr>
+            <tr>
+              <th scope="row">Horas de Libre Disposicion:</th>
+              <td>{{ planestudio.planEstudio.horasLibreDisposicion }}</td>
+            </tr>
+            <tr>
+              <th scope="row">Tiempo Total Minimo de Formación General:</th>
+              <td>{{ planestudio.planEstudio.totalTiempoMinFG }}</td>
+            </tr>
+            <tr>
+              <th scope="row">Tiempo Total Minimo de Formación Diferenciada:</th>
+              <td>{{ planestudio.planEstudio.totalTiempoMinFD }}</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header" id="headingTwo">
+      <h5 class="mb-0">
+        <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+          Asignaturas Registradas
+        </button>
+      </h5>
+    </div>
+    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+      <div class="card-body">
+        <div class="table-responsive-md">
+          <table class="table no-border">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Horas Anuales</th>
+                <th scope="col">Horas Mensuales</th>
+              </tr>
+            </thead>
+            <tr *ngFor=" let asignatura of planestudio.planEstudio.asignaturas ; let i=index">
+              <th scope="row">{{ asignatura.nombre }}</th>
+              <td>{{ asignatura.horasMensuales }}</td>
+              <td>{{ asignatura.horasAnuales }}</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

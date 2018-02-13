@@ -1,11 +1,11 @@
 <div class="container">
     <div class="row">
-        <div class="col-sm-8 offset-sm-2" *ngIf="!planestudio; else forminfo">
-            <form class="form-horizontal" [formGroup]="rForm" (ngSubmit)="crearPlanEstudio(rForm.value)">
+        <div class="col-sm-8 offset-sm-2" *ngIf="planestudio?.planEstudio ; else forminfo">
+            <form class="form-horizontal" [formGroup]="rForm" (ngSubmit)="updatePlanEstudio(rForm.value)">
                 <div class="form-group">
                     <label class="control-label col-sm-12">Nombre</label>
                     <div class="col-sm-12">
-                        <input class="form-control" type="text" formControlName="nombre">
+                        <input class="form-control" [value]="planestudio.planEstudio.nombre" type="text" formControlName="nombre">
                         <small [hidden]="rForm.controls.nombre.valid">
                             El nombre es requerido
                         </small>
@@ -16,7 +16,7 @@
                     <label class="control-label col-sm-12">Tipo</label>
                     <div class="col-sm-12">
                         <select class="form-control col-sm-12" formControlName="tipo">
-                            <option *ngFor="let tipo of tiposJornada" [value]="tipo">{{tipo}}</option>
+                            <option *ngFor="let tipo of tiposJornada" [value]="planestudio.planEstudio.tipo">{{tipo}}</option>
                         </select>
                         <small [hidden]="rForm.controls.tipo.valid">
                             Debe seleccionar alguna opcion
@@ -27,7 +27,7 @@
                 <div class="form-group">
                     <label class="control-label col-sm-12">Horas de Libre Disposicion</label>
                     <div class="col-sm-12">
-                        <input class="form-control" type="number" formControlName="horasLibreDisposicion">
+                        <input class="form-control" [value]="planestudio.planEstudio.horasLibreDisposicion" type="number" formControlName="horasLibreDisposicion">
                         <small [hidden]="rForm.controls.horasLibreDisposicion.valid">
                             Las horas de libre disposicion son requeridas
                         </small>
@@ -36,7 +36,7 @@
                 <div class="form-group">
                     <label class="control-label col-sm-12">Total tiempo minimo de Formacion General</label>
                     <div class="col-sm-12">
-                        <input class="form-control" type="number" formControlName="totalTiempoMinFG">
+                        <input class="form-control" [value]="planestudio.planEstudio.totalTiempoMinFG" type="number" formControlName="totalTiempoMinFG">
                         <small [hidden]="rForm.controls.totalTiempoMinFG.valid">
                             El tiempo de Formacion General es requerido
                         </small>
@@ -45,13 +45,12 @@
                 <div class="form-group">
                     <label class="control-label col-sm-12">Total tiempo minimo de Formacion Diferenciada</label>
                     <div class="col-sm-12">
-                        <input class="form-control" type="number" formControlName="totalTiempoMinFD">
+                        <input class="form-control" [value]="planestudio.planEstudio.totalTiempoMinFD" type="number" formControlName="totalTiempoMinFD">
                         <small [hidden]="rForm.controls.totalTiempoMinFD.valid">
                             El tiempo de Formacion Diferencial es requerido
                         </small>
                     </div>
                 </div>
-
                 <div class="col-sm-12" formArrayName="asignaturas">
                     <h5>Añadir asignatura
                         <button class="btn btn-secundary col-sm-2 float-right" type="button" (click)="addAsignatura()">
@@ -67,27 +66,26 @@
                             <div class="col-sm-12">
                                 <label class="col-sm-1 col-form-label">Nombre</label>
                                 <div class="col-sm-12">
-                                    <input class="form-control form-control col-sm-12" type="text" formControlName="nombre">
+                                    <input class="form-control form-control col-sm-12" [value]="planestudio.planEstudio.asignaturas[i].nombre" type="text" formControlName="nombre">
                                     <small [hidden]="rForm.controls.asignaturas.controls[i].controls.nombre.valid">
                                         El nombre es requerido
                                     </small>
                                 </div>
                                 <div class="col-sm-12">
                                     <label class="col-form-label">Horas Mensuales</label>
-                                    <input class="form-control form-control col-sm-12" type="number" formControlName="horasMensuales">
+                                    <input class="form-control form-control col-sm-12" [value]="planestudio.planEstudio.asignaturas[i].horasMensuales" type="number"
+                                        formControlName="horasMensuales">
                                     <small [hidden]="rForm.controls.asignaturas.controls[i].controls.horasMensuales.valid">
                                         Las horas mensuales son requeridas
                                     </small>
                                 </div>
                                 <div class="col-sm-12">
                                     <label class="col-form-label">Horas Anuales</label>
-                                    <input class="form-control form-control col-sm-12" type="number" formControlName="horasAnuales">
+                                    <input class="form-control form-control col-sm-12" [value]="planestudio.planEstudio.asignaturas[i].horasAnuales" type="number"
+                                        formControlName="horasAnuales">
                                     <small [hidden]="rForm.controls.asignaturas.controls[i].controls.horasAnuales.valid">
                                         Las horas anuales son requeridas
                                     </small>
-                                    <!-- <div class="alert alert-danger" role="alert" [hidden]="rForm.controls.asignaturas.controls[i].controls.horasAnuales.valid">
-                                        Las horas anuales son requeridas
-                                    </div> -->
                                 </div>
                                 <br>
                                 <div class="text-center">
@@ -100,15 +98,18 @@
                         </div>
                     </div>
                 </div>
+
                 <div class="form-group text-center">
                     <div class="col-sm-offset-2 col-sm-12">
-                        <input type="submit" class="btn btn-primary col-sm-8" value="Crear Plan Estudio" [disabled]="!rForm.valid">
+                        <input type="submit" class="btn btn-primary col-sm-6" value="Aceptar Cambios" [disabled]="!rForm.valid">
                     </div>
                 </div>
             </form>
         </div>
     </div>
 </div>
+
+{{ rForm.value | json}}
 <!-- Este se ejecutará cuando se registre la nueva evaluacion -->
 <ng-template #forminfo>
     <div class="form-container">
