@@ -1,0 +1,32 @@
+<div class="row">
+  <div class="col-6 col-md-2"></div>
+  <div class="col-6 col-md-8">
+    <div *ngIf="objetivosAprendizaje.objAprendizaje; else forminfo">
+      <div class="card-header">
+        <h1>Modificar objetivo de aprendizaje</h1>
+        <hr>
+        <div class="card-body">
+          <form [formGroup]="rForm" (ngSubmit)="updateObjAprendizaje(rForm.value)">
+            <div class="form-group">
+              <label for="inputNumero">Numero</label>
+              <input type="number" class="form-control" [value]="objetivosAprendizaje.objAprendizaje.numero" formControlName="numero">
+            </div>
+            <div class="form-group">
+              <label for="inputTipo">Tipo</label>
+              <select class="form-control"formControlName="tipo">
+                <option *ngFor="let tipo of tipos" [value]="objetivosAprendizaje.objAprendizaje.tipo">{{ tipo }}</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="inputDescripcion">Descripcion</label>
+              <textarea class="form-control" formControlName="descripcion" [value]="objetivosAprendizaje.objAprendizaje.descripcion"></textarea>
+            </div>
+            <input type="reset" class="btn btn-secondary" value="Cancel">
+            <button type="submit" class="btn btn-primary" [disabled]="!rForm.valid">Modificar</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-6 col-md-2"></div>
+</div>

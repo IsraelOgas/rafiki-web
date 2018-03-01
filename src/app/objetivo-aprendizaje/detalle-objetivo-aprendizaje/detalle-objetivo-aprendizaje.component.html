@@ -1,0 +1,40 @@
+<div class="row">
+  <div class="col-6 col-md-2"></div>
+  <div class="col-6 col-md-8">
+    <div *ngIf="objetivosAprendizaje">
+      <div class="card-header">
+        <h1>Informacion del objestivo de aprendizaje</h1>
+        <hr>
+        <div class="card-body">
+          <table style="width:100%">
+            <tr>
+              <th>
+                <h4>Numero:</h4>
+              </th>
+              <td>
+                <h4>{{ objetivosAprendizaje.objAprendizaje.numero }}</h4>
+              </td>
+            </tr>
+            <tr>
+              <th>
+                <h4>Tipo:</h4>
+              </th>
+              <td>
+                <h4>{{ objetivosAprendizaje.objAprendizaje.tipo }}</h4>
+              </td>
+            </tr>
+            <tr>
+              <th>
+                <h4>Descripcion:</h4>
+              </th>
+              <td>
+                <h4>{{ objetivosAprendizaje.objAprendizaje.descripcion }}</h4>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-6 col-md-2"></div>
+</div>

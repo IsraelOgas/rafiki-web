@@ -1,0 +1,32 @@
+<div class="row">
+  <div class="col-6 col-md-2"></div>
+  <div class="col-6 col-md-8">
+    <div *ngIf="!idCurso; else forminfo">
+      <div class="card-header">
+        <h1>Crear objetivo de aprendizaje</h1>
+        <hr>
+        <div class="card-body">
+          <form [formGroup]="rForm" (ngSubmit)="addObjetivoAprendizaje(rForm.value)">
+            <div class="form-group">
+              <label for="inputNumero">Numero</label>
+              <input type="number" class="form-control" placeholder="Ingrese numero de objetivo de aprendizaje" formControlName="numero">
+            </div>
+            <div class="form-group">
+              <label for="inputTipo">Tipo</label>
+              <select class="form-control"formControlName="tipo">
+                <option *ngFor="let tipo of tipos" [value]="tipo">{{tipo}}</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="inputDescripcion">Descripcion</label>
+              <textarea class="form-control" formControlName="descripcion" placeholder="Ingrese descripcion"></textarea>
+            </div>
+            <input type="reset" class="btn btn-secondary" value="Cancel">
+            <button type="submit" class="btn btn-primary" [disabled]="!rForm.valid">Crear</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-6 col-md-2"></div>
+</div>
