@@ -16,7 +16,7 @@ export class ModificarPlanDeEstudioComponent implements OnInit {
   mensaje: String = '';
   planestudio: any;
   id: String = '';
-  asignaturas: any[] = [];
+  // asignaturas: any[] = [];
 
   tiposJornada = ['Con JEC', 'Sin JEC'];
 
@@ -39,6 +39,10 @@ export class ModificarPlanDeEstudioComponent implements OnInit {
       'asignaturas': this.fb.array([this.initAsignatura()])
     })
   }
+
+  get asignaturas(): FormArray {
+    return this.rForm.get('asignaturas') as FormArray;
+  };
 
   ngOnInit() {
     this.getPlanEstudio();
@@ -66,12 +70,11 @@ export class ModificarPlanDeEstudioComponent implements OnInit {
       );
   }
 
-
   initAsignatura() {
     return this.fb.group({
-      nombre: [Validators.required],
-      horasMensuales: [Validators.required],
-      horasAnuales: [Validators.required]
+      nombre: ['',Validators.required],
+      horasMensuales: ['',Validators.required],
+      horasAnuales: ['',Validators.required]
     });
   }
 

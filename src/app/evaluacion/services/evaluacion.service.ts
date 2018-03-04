@@ -9,7 +9,7 @@ const httpOptions = {
 
 @Injectable()
 export class EvaluacionService {
-  domain: string = "http://localhost:10010/evaluaciones";
+  domain: string = "http://localhost:10010/";
 
   constructor(private http: HttpClient) { }
 
@@ -21,7 +21,7 @@ export class EvaluacionService {
   * @returns {Object} Object que contiene un Array de objetos de tipo {Evaluacion}
   */
   getEvaluaciones() {
-    console.log('GET ' + this.http.get(`${this.domain}`))
+    console.log('GET ' + this.http.get(`${this.domain}evaluaciones`))
     return this.http.get(`${this.domain}`)
   }
 
@@ -33,7 +33,7 @@ export class EvaluacionService {
   * @returns {Object} Object de tipo {Evaluacion}
   */
   getEvaluacion(id: String) {
-    const url = `${this.domain}/${id}`;
+    const url = `${this.domain}evaluaciones/${id}`;
     return this.http.get(url)
   }
 
@@ -45,7 +45,7 @@ export class EvaluacionService {
   * @returns {Object} Object de tipo {Evaluacion}
   */
   postEvaluacion(evaluacion: Object) {
-    return this.http.post(`${this.domain}`, evaluacion)
+    return this.http.post(`${this.domain}evaluaciones`, evaluacion)
   }
 
   /**
@@ -57,7 +57,7 @@ export class EvaluacionService {
   * @returns {Object} Object de tipo {Evaluacion}
   */
   updateOrganizacion(evaluacion: Object, id: String) {
-    return this.http.put(`${this.domain}/${id}`, evaluacion, httpOptions)
+    return this.http.put(`${this.domain}evaluaciones/${id}`, evaluacion, httpOptions)
   }
 
   /**
@@ -68,7 +68,14 @@ export class EvaluacionService {
   * @returns {Object} Object de tipo {Evaluacion}
   */
   deleteEvaluacion(id: String) {
-    return this.http.delete(`${this.domain}/${id}`)
+    return this.http.delete(`${this.domain}evaluaciones/${id}`)
   }
 
+  getAsignaturas() {
+    return this.http.get(`${this.domain}asignaturas`)
+  }
+
+  getRetroalimentacion() {
+    return this.http.get(`${this.domain}recursoseducativos`)
+  }
 }

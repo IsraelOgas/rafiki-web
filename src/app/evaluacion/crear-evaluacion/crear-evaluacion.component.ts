@@ -13,8 +13,9 @@ import { EvaluacionService } from '../services/evaluacion.service';
 export class CrearEvaluacionComponent implements OnInit {
   rForm: FormGroup;
   mensaje: String = '';
-  nombreProfesor: String = '';
   evaluacion: any;
+  asignaturas: any;
+  retroalimentacion: any;
 
   nivelesDeAprendizaje = ['Recordar', 'Comprender', 'Aplicar', 'Analizar', 'Evaluar', 'Crear'];
   tiposDeEjecucion = ['Al azar', 'Orden numeral', 'Mayor dificultad', 'Menor dificultad'];
@@ -28,16 +29,28 @@ export class CrearEvaluacionComponent implements OnInit {
   ) {
     this.rForm = fb.group({
       'profesorAutor': [null, Validators.required],
-      //'creado_fecha': [null, Validators.required],
+      'titulo': [null, Validators.required],
       'nivelAprendizaje': [null, Validators.required],
       'tipoEjecucion': [null, Validators.required],
       'asignatura': [null, Validators.required],
       'detalles': [null, Validators.required],
-      'retroalimentacion': this.fb.array([])
+      'retroalimentacion': [null, Validators.required],
+      'actividades': this.fb.array([])
     })
   }
 
-  ngOnInit() { }
+  ngOnInit() { 
+    this.evaluacionService.getAsignaturas().subscribe( asignaturas => {
+      this.asignaturas = asignaturas;
+      console.log(this.asignaturas);
+    })
+
+    this.evaluacionService.getRetroalimentacion().subscribe( retroalimentacion => {
+      this.retroalimentacion = retroalimentacion;
+      console.log(this.retroalimentacion);
+    })
+  
+  }
 
   crearEvaluacion(evaluacion) {
     this.mensaje = 'Se ha añadido correctamente la evaluacion de <' + evaluacion.nombreProfesor + '>a la Base de Datos. Se le redireccionará a la pagina de inicio';
@@ -53,14 +66,14 @@ export class CrearEvaluacionComponent implements OnInit {
       });
   }
 
-  removeRetroalimentacion(i: number) {
-    const control = <FormArray>this.rForm.controls['retroalimentacion'];
+  removeActividad(i: number) {
+    const control = <FormArray>this.rForm.controls['actividades'];
     control.removeAt(i)
   }
 
 
-  onAddRetro() {
+  onAddActividad() {
     const control = new FormControl(null, Validators.required);
-    (<FormArray>this.rForm.get('retroalimentacion')).push(control);
+    (<FormArray>this.rForm.get('actividades')).push(control);
   }
 }

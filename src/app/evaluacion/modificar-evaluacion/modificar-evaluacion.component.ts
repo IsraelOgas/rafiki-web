@@ -47,10 +47,10 @@ export class ModificarEvaluacionComponent implements OnInit {
       .subscribe(res => {
         this.evaluacion = res
 
-        for (let index = 0; index < this.evaluacion.evaluacion.retroalimentacion.length; index++) {
-          const control = new FormControl(this.evaluacion.evaluacion.retroalimentacion[index], Validators.required);
-          (<FormArray>this.rForm.get('retroalimentacion')).push(control);
-        }
+        // for (let index = 0; index < this.evaluacion.evaluacion.retroalimentacion.length; index++) {
+        //   const control = new FormControl(this.evaluacion.evaluacion.retroalimentacion[index], Validators.required);
+        //   (<FormArray>this.rForm.get('retroalimentacion')).push(control);
+        // }
       })
   }
 

@@ -53,7 +53,7 @@
                 </div>
                 <div class="col-sm-12" formArrayName="asignaturas">
                     <h5>Añadir asignatura
-                        <button class="btn btn-secundary col-sm-2 float-right" type="button" (click)="addAsignatura()">
+                        <button class="btn btn-secundary col-sm-2 float-right" type="button" >
                             <i class="fas fa-plus-circle"></i>
                         </button>
                     </h5>
@@ -98,6 +98,33 @@
                         </div>
                     </div>
                 </div>
+
+                <div formArrayName="asignaturas" class="well well-lg">
+                    <div *ngFor="let asignatura of asignaturas.controls; let i=index" [formGroupName]="i" >
+                      <!-- The repeated address template -->
+                      <h4>Address #{{i + 1}}</h4>
+                      <div style="margin-left: 1em;">
+                        <div class="form-group">
+                          <label class="center-block">Street:
+                            <input class="form-control" formControlName="nombre">
+                          </label>
+                        </div>
+                        <div class="form-group">
+                          <label class="center-block">City:
+                            <input class="form-control" formControlName="horasMensuales">
+                          </label>
+                        </div>
+                        <div class="form-group">
+                          <label class="center-block">Zip Code:
+                            <input class="form-control" formControlName="horasAnuales">
+                          </label>
+                        </div>
+                      </div>
+                      <br>
+                      <!-- End of the repeated address template -->
+                    </div>
+                    <button (click)="addAsignatura()" type="button">Add a Secret Lair</button>
+                  </div>
 
                 <div class="form-group text-center">
                     <div class="col-sm-offset-2 col-sm-12">

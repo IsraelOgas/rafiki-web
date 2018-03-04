@@ -1,25 +1,18 @@
 <div class="container">
+    <h1 class="text-center">Evaluacion</h1>
     <div class="row">
         <div class="col-sm-8 offset-sm-2" *ngIf="!evaluacion; else forminfo">
             <form class="form-horizontal" [formGroup]="rForm" (ngSubmit)="crearEvaluacion(rForm.value)">
                 <div class="form-group">
+                    <label class="control-label col-sm-5">Titulo</label>
+                    <div class="col-sm-12">
+                        <input class="form-control" type="text" formControlName="titulo">
+                    </div>
+                </div>
+                <div class="form-group">
                     <label class="control-label col-sm-5">Autor</label>
                     <div class="col-sm-12">
                         <input class="form-control" type="text" formControlName="profesorAutor">
-                    </div>
-                </div>
-
-                <!-- <div class="form-group">
-                  <label class="control-label col-sm-5">Fecha Creacion</label>
-                  <div class="col-sm-12">
-                      <input class="form-control" type="date" formControlName="creado_fecha">
-                  </div>
-              </div> -->
-
-                <div class="form-group">
-                    <label class="control-label col-sm-5">Asignatura</label>
-                    <div class="col-sm-12">
-                        <input class="form-control" type="text" formControlName="asignatura">
                     </div>
                 </div>
 
@@ -42,24 +35,42 @@
                 </div>
 
                 <div class="form-group">
+                    <label class="control-label col-sm-5">Asignatura</label>
+                    <div class="col-sm-12">
+                        <select class="form-control" formControlName="asignatura">
+                            <option *ngFor="let asignatura of asignaturas?.data" [value]="asignatura._id">{{asignatura.nombre}}</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
                     <label class="control-label col-sm-5">Detalles</label>
                     <div class="col-sm-12">
                         <input class="form-control" type="text" formControlName="detalles">
                     </div>
                 </div>
 
-                <div class="col-sm-12" formArrayName="retroalimentacion">
-                    <h5>Retroalimentacion
-                        <button class="btn btn-secundary col-sm-2 float-right" type="button" (click)="onAddRetro()">
+                <div class="form-group">
+                    <label class="control-label col-sm-5">Retroalimentacion</label>
+                    <div class="col-sm-12">
+                        <select class="form-control" formControlName="retroalimentacion">
+                            <option *ngFor="let retro of retroalimentacion?.data" [value]="retro._id">{{retro.titulo}}</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="col-sm-12" formArrayName="actividades">
+                    <h5>Actividades
+                        <button class="btn btn-secundary col-sm-2 float-right" type="button" (click)="onAddActividad()">
                             <i class="fas fa-plus-circle"></i> Añadir</button>
                     </h5>
                     <br>
-                    <div class="form-group row" *ngFor="let retro of rForm.get('retroalimentacion').controls; let i=index">
+                    <div class="form-group row" *ngFor="let retro of rForm.get('actividades').controls; let i=index">
                         <label class="col-sm-1 col-form-label">#{{i+1}}</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control form-control col-sm-12" value="evaluacion.evaluacion.retroalimentacion[i]" [formControlName]="i">
+                            <input type="text" class="form-control form-control col-sm-12" value="" [formControlName]="i">
                         </div>
-                        <button class="btn btn-danger col-sm-1" (click)=removeRetroalimentacion(i)>
+                        <button class="btn btn-danger col-sm-1" (click)=removeActividad(i)>
                             <i class="fas fa-trash-alt"></i>
                         </button>
                     </div>
@@ -78,6 +89,7 @@
     </div>
 </div>
 
+{{ rForm.value | json }}
 <!-- Este se ejecutará cuando se registre la nueva evaluacion -->
 <ng-template #forminfo>
     <div class="form-container">
