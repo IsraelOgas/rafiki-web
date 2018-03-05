@@ -12,7 +12,8 @@
                 <div class="form-group">
                     <label class="control-label col-sm-5">Autor</label>
                     <div class="col-sm-12">
-                        <input class="form-control" type="text" formControlName="profesorAutor">
+                        <input type="text" readonly class="form-control-plaintext" value="{{autor}}" formControlName="profesorAutor">
+                        <!-- <input class="form-control" type="text" formControlName="profesorAutor"> -->
                     </div>
                 </div>
 
@@ -65,10 +66,13 @@
                             <i class="fas fa-plus-circle"></i> Añadir</button>
                     </h5>
                     <br>
-                    <div class="form-group row" *ngFor="let retro of rForm.get('actividades').controls; let i=index">
+                    <div class="form-group row" *ngFor="let act of rForm.get('actividades').controls; let i=index">
                         <label class="col-sm-1 col-form-label">#{{i+1}}</label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control form-control col-sm-12" value="" [formControlName]="i">
+                        <div class="col-10">
+                            <label for="selectAct"></label>
+                            <select class="form-control" id="selectAct" [formControlName]="i">
+                                <option *ngFor="let actividad of actividades" [value]="actividad._id">{{actividad.preguntaEnunciado}}</option>
+                            </select>
                         </div>
                         <button class="btn btn-danger col-sm-1" (click)=removeActividad(i)>
                             <i class="fas fa-trash-alt"></i>

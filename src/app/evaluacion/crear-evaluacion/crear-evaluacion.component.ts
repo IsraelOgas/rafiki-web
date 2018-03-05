@@ -15,7 +15,9 @@ export class CrearEvaluacionComponent implements OnInit {
   mensaje: String = '';
   evaluacion: any;
   asignaturas: any;
+  actividades: any;
   retroalimentacion: any;
+  autor = '5a94266d681fc20b3c8e239b'; // Por el momento
 
   nivelesDeAprendizaje = ['Recordar', 'Comprender', 'Aplicar', 'Analizar', 'Evaluar', 'Crear'];
   tiposDeEjecucion = ['Al azar', 'Orden numeral', 'Mayor dificultad', 'Menor dificultad'];
@@ -28,7 +30,7 @@ export class CrearEvaluacionComponent implements OnInit {
     private evaluacionService: EvaluacionService
   ) {
     this.rForm = fb.group({
-      'profesorAutor': [null, Validators.required],
+      'profesorAutor': [this.autor,Validators.required],
       'titulo': [null, Validators.required],
       'nivelAprendizaje': [null, Validators.required],
       'tipoEjecucion': [null, Validators.required],
@@ -50,6 +52,10 @@ export class CrearEvaluacionComponent implements OnInit {
       console.log(this.retroalimentacion);
     })
   
+    this.evaluacionService.getActividades().subscribe( actividades => {
+      this.actividades = actividades['data'];
+      console.log(actividades['data'])
+    })
   }
 
   crearEvaluacion(evaluacion) {
@@ -70,7 +76,6 @@ export class CrearEvaluacionComponent implements OnInit {
     const control = <FormArray>this.rForm.controls['actividades'];
     control.removeAt(i)
   }
-
 
   onAddActividad() {
     const control = new FormControl(null, Validators.required);

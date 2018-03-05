@@ -77,4 +77,8 @@ export class EvaluacionService {
   getRetroalimentacion() {
     return this.http.get(`${this.domain}recursoseducativos`)
   }
+
+  getActividades() {
+    return this.http.get(`${this.domain}actividades`)
+  }
 }
