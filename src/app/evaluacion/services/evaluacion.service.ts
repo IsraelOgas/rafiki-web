@@ -21,8 +21,7 @@ export class EvaluacionService {
   * @returns {Object} Object que contiene un Array de objetos de tipo {Evaluacion}
   */
   getEvaluaciones() {
-    console.log('GET ' + this.http.get(`${this.domain}evaluaciones`))
-    return this.http.get(`${this.domain}`)
+    return this.http.get(`${this.domain}evaluaciones`)
   }
 
   /**

@@ -25,8 +25,8 @@ export class DetallesEvaluacionComponent implements OnInit {
   getEvaluacion(): void {
     this.evaluacionService.getEvaluacion(this._id)
       .subscribe(res => {
-        this.evaluacion = res,
-          console.log(res)
+        this.evaluacion = res['data']
+        console.log(res['data'])
       }
       )
   }

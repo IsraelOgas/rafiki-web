@@ -3,40 +3,58 @@
     Ficha de Evaluación
   </div>
   <div class="table-responsive-md" *ngIf="evaluacion">
-    <table class="table no-border">
+    <table *ngFor="let evaluacion of evaluacion" class="table no-border">
+      <tr>
+        <th scope="row">Titulo:</th>
+        <td>{{ evaluacion.titulo }}</td>
+      </tr>
       <tr>
         <th scope="row">Profesor:</th>
-        <td>{{ evaluacion.evaluacion.profesorAutor }}</td>
+        <td>
+          <a href="">{{ evaluacion.profesorAutor?.nombre }}</a>
+        </td>
       </tr>
       <tr>
         <th scope="row">Creado el:</th>
-        <td>{{ evaluacion.evaluacion.creado_fecha | date:'shortDate' }} a las {{ evaluacion.evaluacion.creado_fecha | date:'shortTime'}}
+        <td>{{ evaluacion.createAt | date:'shortDate' }} a las {{ evaluacion.createAt | date:'shortTime'}}
         </td>
       </tr>
       <tr>
         <th scope="row">Asignatura:</th>
-        <td>{{ evaluacion.evaluacion.asignatura }}</td>
+        <td>
+          <a href="#">{{ evaluacion.asignatura.nombre }}</a>
+        </td>
       </tr>
       <tr>
         <th scope="row">Nivel de Aprendizaje:</th>
-        <td>{{ evaluacion.evaluacion.nivelAprendizaje}}</td>
+        <td>{{ evaluacion.nivelAprendizaje}}</td>
       </tr>
       <tr>
         <th scope="row">Tipo de Ejecución:</th>
-        <td>{{ evaluacion.evaluacion.tipoEjecucion }}</td>
+        <td>{{ evaluacion.tipoEjecucion }}</td>
       </tr>
       <tr>
         <th scope="row">Detalles:</th>
-        <td>{{ evaluacion.evaluacion.detalles }}</td>
+        <td>{{ evaluacion.detalles }}</td>
       </tr>
       <tr>
-        <th scope="row">
-          <h5>Retroalimentacion:</h5>
-        </th>
+        <th scope="row">Retroalimentacion: </th>
+        <td>
+          <a href="#">{{ evaluacion.retroalimentacion.titulo }}</a>
+        </td>
       </tr>
-      <tr *ngFor=" let retroalimentacion of evaluacion.evaluacion.retroalimentacion ; let i=index">
-        <th scope="row"> ({{i+1}})</th>
-        <td>{{ retroalimentacion }}</td>
+      <tr>
+        <th scope="row">Actividad: </th>
       </tr>
+      <tr *ngFor=" let actividad of evaluacion.actividades ; let i=index">
+        <!-- <th scope="row">Actividad: </th> -->
+        <th scope="row">({{ i+1 }})</th>
+        <td>
+          Tema: <a href="#">{{ actividad.tema }}</a><br>
+          Subtema: {{ actividad.subTema }}<br>
+          Tipo de pregunta: {{ actividad.tipoPregunta }}
+        </td>
+      </tr>
+      <!-- <tr *ngFor=" let retroalimentacion of evaluacion.evaluacion.retroalimentacion ; let i=index"> -->
     </table>
   </div>

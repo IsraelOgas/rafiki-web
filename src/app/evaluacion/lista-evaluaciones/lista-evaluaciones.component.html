@@ -6,8 +6,8 @@
 <div class="container">
   <div class="row">
     <div class="col-xs-12 col-sm-12 cold-md-12 col-lg-12 col-xl-12">
-      <div class="card-columns" *ngIf="evaluaciones" [@animation]="evaluaciones.evaluaciones.length">
-        <div class="card" *ngFor="let evaluacion of evaluaciones.evaluaciones; let i = index" style="box-shadow: -5px 5px 5px #888888; ">
+      <div class="card-columns" *ngIf="evaluaciones" [@animation]="evaluaciones.length">
+        <div class="card" *ngFor="let evaluacion of evaluaciones; let i = index" style="box-shadow: -5px 5px 5px #888888; ">
           <div class="card-header">
             <nav class="navbar">
               #{{i}} evaluacion
@@ -25,14 +25,14 @@
             </nav>
           </div>
           <div class="card-body">
-            <h5 class="card-title">{{ evaluacion.asignatura }}</h5>
-            <h6 class="card-subtitle mb-2 text-muted">Creado por: {{ evaluacion.profesorAutor }}</h6>
+            <h5 class="card-title">{{ evaluacion.asignatura.nombre }}</h5>
+            <h6 class="card-subtitle mb-2 text-muted">Creado por: {{ evaluacion.profesorAutor.nombre }}</h6>
             <p class="card-text">{{ evaluacion.detalles }}</p>
             <button type="button" class="btn btn-primary" routerLink="/evaluacion/{{evaluacion._id}}">
               <i class="fas fa-info-circle"></i> Ver Detalles </button>
           </div>
           <div class="card-footer text-muted">
-            Creado el {{ evaluacion.creado_fecha | date:'shortDate' }} a las {{ evaluacion.creado_fecha | date:'shortTime' }}
+            Creado el {{ evaluacion.createAt | date:'shortDate' }} a las {{ evaluacion.createAt | date:'shortTime' }}
           </div>
         </div>
       </div>

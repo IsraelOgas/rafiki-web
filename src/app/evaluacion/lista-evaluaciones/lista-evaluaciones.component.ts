@@ -46,7 +46,7 @@ export class ListaEvaluacionesComponent implements OnInit {
   getEvaluaciones(): void {
     this.evaluacionService.getEvaluaciones()
       .subscribe(res => {
-        this.evaluaciones = res
+        this.evaluaciones = res['data']
       }
       )
   }
