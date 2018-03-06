@@ -15,6 +15,7 @@ export class ModificarEvaluacionComponent implements OnInit {
   evaluacion: any;
   id: String;
   mensaje: String = '';
+  arr = [];
 
   nivelesDeAprendizaje = ['Recordar', 'Comprender', 'Aplicar', 'Analizar', 'Evaluar', 'Crear'];
   tiposDeEjecucion = ['Al azar', 'Orden numeral', 'Mayor dificultad', 'Menor dificultad'];
@@ -27,15 +28,33 @@ export class ModificarEvaluacionComponent implements OnInit {
     this.route.params.subscribe(res => {
       this.id = res.id;
     })
-    this.rForm = fb.group({
-      'profesorAutor': [Validators.required],
-      //'creado_fecha': [null, Validators.required],
+    this.evaluacionService.getEvaluacion(this.id).subscribe(data => {
+      this.evaluacion = data['data']
+      // console.log(this.evaluacion['0'])
+      Array.from(this.evaluacion[0])
+      console.log(this.evaluacion)
+    })
+
+    this.rForm = this.fb.group({
+      'profesorAutor': [this.evaluacion['0'].profesorAutor, Validators.required],
+      // 'titulo': [this.evaluacion[0].titulo, Validators.required],
+      // 'nivelAprendizaje': [this.evaluacion[0].nivelAprendizaje, Validators.required],
+      // 'tipoEjecucion': [this.evaluacion[0].tipoEjecucion, Validators.required],
+      // 'asignatura': [this.evaluacion[0].asignatura._id, Validators.required],
+      // 'detalles': [this.evaluacion[0].detalles, Validators.required],
+      // 'retroalimentacion': [this.evaluacion[0].retroalimentacion, Validators.required],
+      // 'actividades': this.fb.array([this.evaluacion[0].actividades])
+
+      // 'profesorAutor': ['hola',Validators.required],
+      'titulo': [Validators.required],
       'nivelAprendizaje': [Validators.required],
       'tipoEjecucion': [Validators.required],
-      'asignatura': [Validators.required],
+      'asignatura': [ Validators.required],
       'detalles': [Validators.required],
-      'retroalimentacion': this.fb.array([])
+      'retroalimentacion': [Validators.required],
+      'actividades': this.fb.array([])
     })
+    console.log(this.rForm.value)
   }
 
   ngOnInit() {

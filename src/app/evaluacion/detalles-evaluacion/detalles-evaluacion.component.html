@@ -44,11 +44,11 @@
         </td>
       </tr>
       <tr>
-        <th scope="row">Actividad: </th>
+        <th scope="row">Actividades: </th>
       </tr>
       <tr *ngFor=" let actividad of evaluacion.actividades ; let i=index">
         <!-- <th scope="row">Actividad: </th> -->
-        <th scope="row">({{ i+1 }})</th>
+        <th scope="row">Actividad ({{ i+1 }})</th>
         <td>
           Tema: <a href="#">{{ actividad.tema }}</a><br>
           Subtema: {{ actividad.subTema }}<br>

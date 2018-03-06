@@ -1,4 +1,106 @@
 <div class="container">
+  <h1 class="text-center">Evaluacion</h1>
+  <div class="row">
+    <div class="col-sm-8 offset-sm-2" *ngIf="!evaluacion; else forminfo">
+      <form class="form-horizontal" [formGroup]="rForm" (ngSubmit)="updateEvaluacion(rForm.value)">
+        <div class="form-group">
+          <label class="control-label col-sm-5">Titulo</label>
+          <div class="col-sm-12">
+            <input class="form-control" type="text" formControlName="titulo">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="control-label col-sm-5">Autor</label>
+          <div class="col-sm-12">
+            <input type="text" readonly class="form-control-plaintext" value="{{autor}}" formControlName="profesorAutor">
+            <!-- <input class="form-control" type="text" formControlName="profesorAutor"> -->
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="control-label col-sm-5">Nivel de Aprendizaje</label>
+          <div class="col-sm-12">
+            <select class="form-control col-sm-12" formControlName="nivelAprendizaje">
+              <option *ngFor="let nivelAprendizaje of nivelesDeAprendizaje" [value]="nivelAprendizaje">{{nivelAprendizaje}}</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="control-label col-sm-5">Tipo de Ejecución</label>
+          <div class="col-sm-12">
+            <select class="form-control" formControlName="tipoEjecucion">
+              <option *ngFor="let tipoEjecucion of tiposDeEjecucion" [value]="tipoEjecucion">{{tipoEjecucion}}</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="control-label col-sm-5">Asignatura</label>
+          <div class="col-sm-12">
+            <select class="form-control" formControlName="asignatura">
+              <option *ngFor="let asignatura of asignaturas?.data" [value]="asignatura._id">{{asignatura.nombre}}</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="control-label col-sm-5">Detalles</label>
+          <div class="col-sm-12">
+            <input class="form-control" type="text" formControlName="detalles">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="control-label col-sm-5">Retroalimentacion</label>
+          <div class="col-sm-12">
+            <select class="form-control" formControlName="retroalimentacion">
+              <option *ngFor="let retro of retroalimentacion?.data" [value]="retro._id">{{retro.titulo}}</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="col-sm-12" formArrayName="actividades">
+          <h5>Actividades
+            <button class="btn btn-secundary col-sm-2 float-right" type="button" (click)="onAddActividad()">
+              <i class="fas fa-plus-circle"></i> Añadir</button>
+          </h5>
+          <br>
+          <div class="form-group row" *ngFor="let act of rForm.get('actividades').controls; let i=index">
+            <label class="col-sm-1 col-form-label">#{{i+1}}</label>
+            <div class="col-10">
+              <label for="selectAct"></label>
+              <select class="form-control" id="selectAct" [formControlName]="i">
+                <option *ngFor="let actividad of actividades" [value]="actividad._id">{{actividad.preguntaEnunciado}}</option>
+              </select>
+            </div>
+            <button class="btn btn-danger col-sm-1" (click)=removeActividad(i)>
+              <i class="fas fa-trash-alt"></i>
+            </button>
+          </div>
+        </div>
+
+        <br>
+
+        <div class="form-group">
+          <div class="col-sm-offset-2 col-sm-10">
+            <input type="submit" class="btn btn-primary" value="Crear Evaluacion" [disabled]="!rForm.valid">
+          </div>
+        </div>
+
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- {{ rForm.value | json }} -->
+<!-- Este se ejecutará cuando se registre la nueva evaluacion -->
+<ng-template #forminfo>
+  <div class="form-container">
+    <h2>{{ mensaje }}</h2>
+  </div>
+</ng-template>
+<!-- <div class="container">
   <div class="row">
     <div class="col-sm-8 offset-sm-2" *ngIf="evaluacion?.evaluacion && !profesorAutor; else forminfo">
       <form class="form-horizontal" [formGroup]="rForm" (ngSubmit)="updateEvaluacion(rForm.value)">
@@ -12,14 +114,6 @@
             </div>
           </div>
         </div>
-
-        <!-- <div class="form-group">
-            <label class="control-label col-sm-5">Fecha Creacion</label>
-            <div class="col-sm-12">
-                <input class="form-control" type="date" [value]="evaluacion.evaluacion.creado_fecha" formControlName="creado_fecha">
-            </div>
-          </div> -->
-
         <div class="form-group">
           <label class="control-label col-sm-5">Asignatura</label>
           <div class="col-sm-12">
@@ -81,12 +175,9 @@
   </div>
 </div>
 
-<!-- Este se ejecutará cuando se registre la nueva organizacion -->
 <ng-template #forminfo>
   <div class="form-container">
     <h1>{{ mensaje }}</h1>
-    <!-- <h1>{{ nombre }}</h1>
 
-      <p>{{ descripcion }}</p> -->
   </div>
-</ng-template>
+</ng-template> -->

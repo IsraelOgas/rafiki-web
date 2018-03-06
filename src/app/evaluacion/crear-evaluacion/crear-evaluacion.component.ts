@@ -17,7 +17,7 @@ export class CrearEvaluacionComponent implements OnInit {
   asignaturas: any;
   actividades: any;
   retroalimentacion: any;
-  autor = '5a94266d681fc20b3c8e239b'; // Por el momento
+  autor = '5a94266d681fc20b3c8e239b'; // Por el momento hasta implementar bien la autentificacion
 
   nivelesDeAprendizaje = ['Recordar', 'Comprender', 'Aplicar', 'Analizar', 'Evaluar', 'Crear'];
   tiposDeEjecucion = ['Al azar', 'Orden numeral', 'Mayor dificultad', 'Menor dificultad'];
@@ -59,7 +59,7 @@ export class CrearEvaluacionComponent implements OnInit {
   }
 
   crearEvaluacion(evaluacion) {
-    this.mensaje = 'Se ha añadido correctamente la evaluacion de <' + evaluacion.nombreProfesor + '>a la Base de Datos. Se le redireccionará a la pagina de inicio';
+    this.mensaje = 'Se ha añadido correctamente la evaluacion de a la Base de Datos. Se le redireccionará a la pagina de inicio';
 
     this.evaluacionService.postEvaluacion(evaluacion)
       .subscribe(res => {
